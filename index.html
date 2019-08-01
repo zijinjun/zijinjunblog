@@ -258,7 +258,7 @@
                 
               
 
-              <time title="创建时间：2019-08-01 19:17:13 / 修改时间：19:35:30" itemprop="dateCreated datePublished" datetime="2019-08-01T19:17:13+08:00">2019-08-01</time>
+              <time title="创建时间：2019-08-01 19:17:13 / 修改时间：19:36:36" itemprop="dateCreated datePublished" datetime="2019-08-01T19:17:13+08:00">2019-08-01</time>
             </span>
           
             
@@ -277,36 +277,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <p><del>一个菜鸟学起来了多项式</del></p>
+          <!--noindex-->
           
-            <h4 id="多项式求逆"><a href="#多项式求逆" class="headerlink" title="多项式求逆"></a>多项式求逆</h4><p>​    推式子环节：<br>$$<br>\large 给定 A(x) 求一个 B(x) 使得 A(x)*B(x) \equiv  1\pmod{x^n}<br>$$</p>
-<p>$$<br>\large 设 A(x)*C(x) \equiv 1 \pmod{x^{\lceil\frac{n}{2}\rceil}}<br>$$</p>
-<p>$$<br>\large \because A(x)*B(x) \equiv 1 \pmod{x^{\lceil\frac{n}{2}\rceil}}<br>$$</p>
-<p>$$<br>\large \therefore C(x)-B(x)  \equiv 0 \pmod{x^{\lceil\frac{n}{2}\rceil}}<br>$$</p>
-<p>$$<br>\large C(x)^2+B(x)^2-2C(x)B(x)  \equiv 0 \pmod{x^n}<br>$$</p>
-<p>$$<br>\large A(x)C(x)^2-2C(x)+b(x)  \equiv x \pmod{x^n}<br>$$</p>
-<p>$$<br>\large B(x)  \equiv 2C(x)-A(x)C(x)^2 \pmod{x^n}<br>$$</p>
-<p>​    然后到了这一步，我们就明显看出来可以递归求解，对于后面的$A(x)C(x)^2$ 我们使用$NTT$ ，这一部分的复杂度是 $nlog$ 的<br>$$<br>\large T(n)=T\Big(\frac{n}{2}\Big)+O(nlogn)=nlogn<br>$$<br>​    所以，多项式求逆的复杂度就是 $nlogn$</p>
-<h4 id="多项式求-ln"><a href="#多项式求-ln" class="headerlink" title="多项式求 ln"></a>多项式求 ln</h4><p>​    由于高等数学的芝士，我们知道 <del>我不知道</del><br>$$<br>\large ln ~F(x)=\int \frac{F’(x)}{F(x)}<br>$$<br>​    然后，这里的求导和积分因为都是最基本的多项式，所以就是一个 $O(n)$ 的模拟，然后是对于 $F(x)$ 求逆，然后再用 $NTT$ 乘起来，然后就口胡完了</p>
-<h4 id="多项式exp"><a href="#多项式exp" class="headerlink" title="多项式exp"></a>多项式exp</h4><p><strong>前置芝士：牛顿迭代：</strong><br>$$<br>\large 已知多项式函数G(z)，求多项式函数F(x)满足<br>$$</p>
-<p>$$<br>\large G(F(x))\equiv0 \pmod{x^n}<br>$$</p>
-<p>$$<br>\large 假设我们已经求得F_0(x)满足~~G(F_0(x))\equiv0\pmod{x^{\left\lceil\frac{n}{2}\right\rceil}}<br>$$</p>
-<p>$$<br>\large 将函数G在z=F_0(x)处进行泰勒展开<br>$$</p>
-<p>$$<br>\large G(F(x))=\sum_{i=1}^{\infty}\frac{G^i(F_0(x))}{i!}(F(x)-F_0(x))^i\ \ \ \ 其中G^i为G的i阶导函数.<br>$$</p>
-<p>$$<br>\large 取前两项 ~~ G(F(x))\equiv G(F_0(x))+G’(F_0(x))(F(x)-F_0(x))\pmod{x^n}<br>$$</p>
-<p>$$<br>\large 考虑到~G(F(x))\equiv 0\pmod{x^n}<br>$$</p>
-<p>$$<br>\large F(x)\equiv F_0(x)-\frac{G(F_0(x))}{G’(F_0(x))}\pmod{x^n}<br>$$</p>
-<p>$$<br>\large 边界条件即f[0]=1，向上迭代即可<br>$$</p>
-<p><strong>然后我们来看多项式 $exp$</strong><br>$$<br>\large 求 B(x) \equiv e^{A(x)}  \pmod{x^n}<br>$$</p>
-<p>$$<br>\large 求逆 ~ A(x)\equiv lnB(x) \pmod{x^n}<br>$$</p>
-<p>$$<br>\large 移项 ~~ lnB(x)-A(x)\equiv 0 \pmod{x^n}<br>$$</p>
-<p>$$<br>\large 令~~G(B(x))\equiv\ln B(x)-A(x)\pmod{x^n}<br>$$</p>
-<p>$$<br>\large 使用牛顿迭代<br>$$</p>
-<p>$$<br>\large B_1(x)=B_0(x)-\frac{G(B_0(x))}{G’(B_0(x))}<br>$$</p>
-<p>$$<br>\large =B_0(x)-\frac{lnB(x)-A(x)}{\frac{1}{lnB(x)}}=B_0(x)(1-lnB_0(x)+A(x))<br>$$</p>
-<p>​    然后到了这一步，我们观察式子，发现这里又一次可以按照 $B_0(x)$ 递归下去了 </p>
-<p>​    我们考虑计算时间复杂度，这里的复杂度和多项式求逆一样，都是 $O(nlogn)$ 的</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/多项式学习笔记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -576,6 +556,14 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="https://Nikaidou-Shinku.github.io" title="https://Nikaidou-Shinku.github.io" rel="noopener" target="_blank">yurzhang</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.org/blog/contributation/" title="https://www.luogu.org/blog/contributation/" rel="noopener" target="_blank">BJpers2</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huyufeifei/" title="https://www.cnblogs.com/huyufeifei/" rel="noopener" target="_blank">huyufeifei</a>
         </li>
       
     </ul>
