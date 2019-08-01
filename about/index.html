@@ -57,17 +57,17 @@
   };
 </script>
 
-  <meta name="description" content="12121">
+  <meta name="description" content="来自 $HB-HSY$，高二老年待退役选手 没想到这么快我也高二了，一年前还是个萌新啊">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
 <meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="子衿君&#39;blogs">
-<meta property="og:description" content="12121">
+<meta property="og:description" content="来自 $HB-HSY$，高二老年待退役选手 没想到这么快我也高二了，一年前还是个萌新啊">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-01T11:03:42.823Z">
+<meta property="og:updated_time" content="2019-08-01T11:23:39.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="12121">
+<meta name="twitter:description" content="来自 $HB-HSY$，高二老年待退役选手 没想到这么快我也高二了，一年前还是个萌新啊">
   <link rel="canonical" href="http://yoursite.com/about/">
 
 
@@ -263,7 +263,7 @@
       
       <div class="post-body">
         
-          <p>12121</p>
+          <p>来自 $HB-HSY$，高二老年待退役选手 <del>没想到这么快我也高二了</del>，一年前还是个萌新啊</p>
 
         
       </div>
@@ -427,6 +427,51 @@
 
 
 
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
