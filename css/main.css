@@ -902,7 +902,7 @@ pre .javascript .function {
   right: 30px;
   text-align: center;
   transition-property: bottom;
-  width: 24px;
+  width: initial;
   z-index: 1050;
   transition-delay: 0s;
   transition-duration: 0.2s;
@@ -1398,6 +1398,7 @@ pre .javascript .function {
   margin: 0 auto;
   max-width: 120px;
   padding: 2px;
+  border-radius: 50%;
 }
 .site-author-name {
   color: #222;
@@ -1425,7 +1426,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #6affff;
+  background: #9effff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
