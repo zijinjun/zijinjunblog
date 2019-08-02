@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="题目描述 给出一个  n         个点  m         条边的无向连通图，每条边正反向分别有一个权值 请你找一个欧拉回路，使回路中最大权值尽可能小">
-<meta name="keywords" content="图论 - 网络流,题解,基础算法 - 二分答案,POI,图论 - 欧拉回路">
+  <meta name="description" content="题目描述  n         个工作，  m         个机器，完成每个工作都有收益，每个工作依赖若干机器，机器可以买，也可以租最大化总收益减去总代价的值">
+<meta name="keywords" content="图论 - 网络流,题解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【题解】POI2010MOS-Bridges">
-<meta property="og:url" content="http://yoursite.com/【题解】POI2010MOS-Bridges/index.html">
+<meta property="og:title" content="【题解】CEOI2008order">
+<meta property="og:url" content="http://yoursite.com/【题解】CEOI2008order/index.html">
 <meta property="og:site_name" content="子衿君&#39;blogs">
-<meta property="og:description" content="题目描述 给出一个  n         个点  m         条边的无向连通图，每条边正反向分别有一个权值 请你找一个欧拉回路，使回路中最大权值尽可能小">
+<meta property="og:description" content="题目描述  n         个工作，  m         个机器，完成每个工作都有收益，每个工作依赖若干机器，机器可以买，也可以租最大化总收益减去总代价的值">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-02T12:01:52.690Z">
+<meta property="og:updated_time" content="2019-08-02T12:57:04.348Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【题解】POI2010MOS-Bridges">
-<meta name="twitter:description" content="题目描述 给出一个  n         个点  m         条边的无向连通图，每条边正反向分别有一个权值 请你找一个欧拉回路，使回路中最大权值尽可能小">
-  <link rel="canonical" href="http://yoursite.com/【题解】POI2010MOS-Bridges/">
+<meta name="twitter:title" content="【题解】CEOI2008order">
+<meta name="twitter:description" content="题目描述  n         个工作，  m         个机器，完成每个工作都有收益，每个工作依赖若干机器，机器可以买，也可以租最大化总收益减去总代价的值">
+  <link rel="canonical" href="http://yoursite.com/【题解】CEOI2008order/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>【题解】POI2010MOS-Bridges | 子衿君'blogs</title>
+  <title>【题解】CEOI2008order | 子衿君'blogs</title>
   
 
 
@@ -228,7 +228,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】POI2010MOS-Bridges/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】CEOI2008order/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="子衿君">
@@ -242,7 +242,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">【题解】POI2010MOS-Bridges
+          <h1 class="post-title" itemprop="name headline">【题解】CEOI2008order
 
               
             
@@ -262,7 +262,7 @@
                 
               
 
-              <time title="创建时间：2019-08-02 19:50:09 / 修改时间：20:01:52" itemprop="dateCreated datePublished" datetime="2019-08-02T19:50:09+08:00">2019-08-02</time>
+              <time title="创建时间：2019-08-02 20:37:08 / 修改时间：20:57:04" itemprop="dateCreated datePublished" datetime="2019-08-02T20:37:08+08:00">2019-08-02</time>
             </span>
           
             
@@ -291,7 +291,7 @@
 
       
         <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
-<p>给出一个 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
 <title id="MathJax-SVG-2-Title">n</title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
@@ -299,7 +299,7 @@
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
  <use xlink:href="#E2-MJMATHI-6E" x="0" y="0"/>
 </g>
-</svg></span> 个点 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.04ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 878.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+</svg></span> 个工作， <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.04ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 878.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
 <title id="MathJax-SVG-3-Title">m</title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E3-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
@@ -307,59 +307,27 @@
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
  <use xlink:href="#E3-MJMATHI-6D" x="0" y="0"/>
 </g>
-</svg></span> 条边的无向连通图，每条边正反向分别有一个权值</p>
-<p>请你找一个欧拉回路，使回路中最大权值尽可能小</p>
+</svg></span> 个机器，完成每个工作都有收益，每个工作依赖若干机器，机器可以买，也可以租最大化总收益减去总代价的值</p>
 <a id="more"></a>
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
-<p>看到最大值最小，我们直接考虑二分答案</p>
-<p>然后就变成了，给 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
-<title id="MathJax-SVG-4-Title">n</title>
+<p>如果不能租，那么就是一个最大权闭合子图的板子题，那么我们直接考虑怎么处理租用的情况</p>
+<p>那么.....<s>很明显我们就可以建图了</s></p>
+<p>每个任务向机器连边时候不连<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.976ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 2142.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
+<title id="MathJax-SVG-4-Title">INF</title>
 <defs aria-hidden="true">
-<path stroke-width="1" id="E4-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E4-MJMATHI-49" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"/>
+<path stroke-width="1" id="E4-MJMATHI-4E" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"/>
+<path stroke-width="1" id="E4-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E4-MJMATHI-6E" x="0" y="0"/>
+ <use xlink:href="#E4-MJMATHI-49" x="0" y="0"/>
+ <use xlink:href="#E4-MJMATHI-4E" x="504" y="0"/>
+ <use xlink:href="#E4-MJMATHI-46" x="1393" y="0"/>
 </g>
-</svg></span> 个点，<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.04ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 878.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
-<title id="MathJax-SVG-5-Title">m</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E5-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E5-MJMATHI-6D" x="0" y="0"/>
-</g>
-</svg></span> 挑边的有向图是否有欧拉回路</p>
-<p>考虑网络流</p>
-<p>首先我们将所有无向边任意定向，统计一下所有点出入度数，如果二者奇偶性不同，那么无解</p>
-<p>每个点向源汇点连一条自身出入度差值的一半的边，表示需要转向这么多次</p>
-<p>那么问题就转化为匹配问题，如果最后最大流流满，那么就一定对应原图中存在欧拉回路</p>
-<p>( <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.516ex" height="3.343ex" style="vertical-align: -1.171ex; margin-left: -0.089ex;" viewbox="-38.5 -934.9 1944.4 1439.2" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-6-Title">
-<title id="MathJax-SVG-6-Title">ps：</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E6-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
-<path stroke-width="1" id="E6-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E6-MJMATHI-70" x="0" y="0"/>
- <use xlink:href="#E6-MJMATHI-73" x="503" y="0"/>
-<g transform="translate(973,0)">
-<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">：</text>
-</g>
-</g>
-</svg></span> 这道题在洛谷上面没有 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.627ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1561.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-7-Title">
-<title id="MathJax-SVG-7-Title">Spj</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E7-MJMATHI-53" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"/>
-<path stroke-width="1" id="E7-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
-<path stroke-width="1" id="E7-MJMATHI-6A" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E7-MJMATHI-53" x="0" y="0"/>
- <use xlink:href="#E7-MJMATHI-70" x="645" y="0"/>
- <use xlink:href="#E7-MJMATHI-6A" x="1149" y="0"/>
-</g>
-</svg></span> ，所以第二问输出方案过不了，这里直接看第一问，判断最小是多少 )</p>
-<p>实在是懒得放那个被我改的面目全非的丑陋代码了</p>
+</svg></span>，而是连一条租用费用的边，那么这条边也就可以割了</p>
+<p><s>口胡的简单到忘了当时是谁在那拆点拆到自闭</s></p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000100</span>,INF=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt=<span class="number">1</span>,s,t,h[N],m,sum;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> next,to,f;&#125;e[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> QXX(u) for(int i=h[u],v;v=e[i].to,i;i=e[i].next)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> f)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    e[++cnt]=(edge)&#123;h[u],v,f&#125;,h[u]=cnt;</span><br><span class="line">    e[++cnt]=(edge)&#123;h[v],u,<span class="number">0</span>&#125;,h[v]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="keyword">int</span> dep[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dep,<span class="number">0</span>,<span class="keyword">sizeof</span>(dep));</span><br><span class="line">    <span class="keyword">while</span>(!q.empty()) q.pop();</span><br><span class="line">    q.push(s),dep[s]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.front();q.pop();</span><br><span class="line">        QXX(u)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(dep[v]||!e[i].f) <span class="keyword">continue</span>;</span><br><span class="line">            dep[v]=dep[u]+<span class="number">1</span>;q.push(v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dep[t];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> flow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(u==t) <span class="keyword">return</span> flow;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    QXX(u)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(dep[v]!=dep[u]+<span class="number">1</span>||!e[i].f)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">int</span> k=dfs(v,min(flow-res,e[i].f));</span><br><span class="line">        e[i].f-=k;</span><br><span class="line">        e[i^<span class="number">1</span>].f+=k;</span><br><span class="line">        res+=k;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(res==<span class="number">0</span>) dep[u]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dinic</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans,maxf=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(bfs())</span><br><span class="line">        <span class="keyword">while</span>((ans=dfs(s,INF))) maxf+=ans;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;sum-maxf;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    s=n+m+<span class="number">1</span>,t=s+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x=read();</span><br><span class="line">        add(s,i,x);</span><br><span class="line">        sum+=x;</span><br><span class="line">        <span class="keyword">int</span> k=read();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=k;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> a=read(),b=read();</span><br><span class="line">            add(i,a+n,b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">        add(i+n,t,read());</span><br><span class="line">    dinic();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -375,17 +343,11 @@
           
             <a href="/tags/题解/" rel="tag"># 题解</a>
           
-            <a href="/tags/基础算法-二分答案/" rel="tag"># 基础算法 - 二分答案</a>
-          
-            <a href="/tags/POI/" rel="tag"># POI</a>
-          
-            <a href="/tags/图论-欧拉回路/" rel="tag"># 图论 - 欧拉回路</a>
-          
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/【题解】HNOI2007紧急疏散/" rel="next" title="【题解】HNOI2007紧急疏散">
-                <i class="fa fa-chevron-left"></i> 【题解】HNOI2007紧急疏散
+              <a href="/【题解】POI2010MOS-Bridges/" rel="next" title="【题解】POI2010MOS-Bridges">
+                <i class="fa fa-chevron-left"></i> 【题解】POI2010MOS-Bridges
               </a>
             
           </div>
@@ -393,10 +355,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/【题解】CEOI2008order/" rel="prev" title="【题解】CEOI2008order">
-                【题解】CEOI2008order <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -536,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考代码"><span class="nav-number">3.</span> <span class="nav-text">参考代码</span></a></li></ol></div>
             
 
           </div>
