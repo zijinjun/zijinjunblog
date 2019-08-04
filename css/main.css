@@ -1464,7 +1464,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8a6cc2;
+  background: #0a4e7d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2530,6 +2530,7 @@ ul.breadcrumb li+li:last-child {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-code {
-  tab-size: 4;
+body {
+  background-image: url("D:picturetu-1.PNG");
+  background-size: cover;
 }
