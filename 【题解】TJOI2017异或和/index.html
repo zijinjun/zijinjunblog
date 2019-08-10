@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="题目描述 一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)">
-<meta name="keywords" content="动态规划,题解,省选 - HAOI">
+  <meta name="description" content="题目描述 给一个序列，求所有子段和的异或和">
+<meta name="keywords" content="树状数组,题解,省选 - TJOI,权值树状数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【题解】haoi2011problem a">
-<meta property="og:url" content="http://yoursite.com/【题解】HAOI2011problem a/index.html">
+<meta property="og:title" content="【题解】TJOI2017异或和">
+<meta property="og:url" content="http://yoursite.com/【题解】TJOI2017异或和/index.html">
 <meta property="og:site_name" content="子衿君&#39;blogs">
-<meta property="og:description" content="题目描述 一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)">
+<meta property="og:description" content="题目描述 给一个序列，求所有子段和的异或和">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-07T07:37:32.389Z">
+<meta property="og:updated_time" content="2019-08-10T00:44:50.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【题解】haoi2011problem a">
-<meta name="twitter:description" content="题目描述 一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)">
-  <link rel="canonical" href="http://yoursite.com/【题解】HAOI2011problem a/">
+<meta name="twitter:title" content="【题解】TJOI2017异或和">
+<meta name="twitter:description" content="题目描述 给一个序列，求所有子段和的异或和">
+  <link rel="canonical" href="http://yoursite.com/【题解】TJOI2017异或和/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>【题解】haoi2011problem a | 子衿君'blogs</title>
+  <title>【题解】TJOI2017异或和 | 子衿君'blogs</title>
   
 
 
@@ -217,7 +217,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】HAOI2011problem a/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】TJOI2017异或和/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="子衿君">
@@ -231,7 +231,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">【题解】haoi2011problem a
+          <h1 class="post-title" itemprop="name headline">【题解】TJOI2017异或和
 
               
             
@@ -251,7 +251,7 @@
                 
               
 
-              <time title="创建时间：2019-08-07 07:52:27 / 修改时间：15:37:32" itemprop="dateCreated datePublished" datetime="2019-08-07T07:52:27+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-10 08:42:42 / 修改时间：08:44:50" itemprop="dateCreated datePublished" datetime="2019-08-10T08:42:42+08:00">2019-08-10</time>
             </span>
           
             
@@ -280,23 +280,12 @@
 
       
         <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
-<p>一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)</p>
+<p>给一个序列，求所有子段和的异或和</p>
 <a id="more"></a>
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
-<p>这个题目，我们考虑 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.67ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1580 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">DP</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMATHI-44" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"/>
-<path stroke-width="1" id="E2-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMATHI-44" x="0" y="0"/>
- <use xlink:href="#E2-MJMATHI-50" x="828" y="0"/>
-</g>
-</svg></span> 来求</p>
-<p>转化为带权区间覆盖问题</p>
+<p>运用权值树状数组计算贡献</p>
 <h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> tot,ans,Ans,n,f[N];</span><br><span class="line"><span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;,<span class="keyword">int</span>&gt; ma;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; h[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a=read(),b=read();</span><br><span class="line">        <span class="keyword">int</span> l=a+<span class="number">1</span>,r=n-b;</span><br><span class="line">        <span class="keyword">if</span>(l&gt;r)<span class="keyword">continue</span>;</span><br><span class="line">        ma[make_pair(l,r)]++;</span><br><span class="line">        <span class="keyword">if</span>(ma[make_pair(l,r)]==<span class="number">1</span>)h[r].push_back(l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i]=f[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;h[i].size();++j)</span><br><span class="line">            f[i]=max(f[i],f[h[i][j]<span class="number">-1</span>]+min(i-h[i][j]+<span class="number">1</span>,ma[make_pair(h[i][j],i)]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,n-f[n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line">ll n,a[N],tot;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> t[N];</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x)&amp;(-x))	</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>&#123;<span class="built_in">memset</span>(t,<span class="number">0</span>,<span class="keyword">sizeof</span>(t));&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> k)</span></span>&#123;<span class="keyword">while</span>(k&lt;=tot)&#123;t[k]++,k+=lowbit(k);&#125;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="number">0</span>)</span></span>;<span class="keyword">while</span>(x&gt;<span class="number">0</span>)&#123;a+=t[x],x-=lowbit(x);&#125;<span class="keyword">return</span> a;&#125;</span><br><span class="line">&#125;s0,s1;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        a[i]=read()+a[i<span class="number">-1</span>];</span><br><span class="line">    tot=a[n]+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;(<span class="number">1</span>&lt;&lt;i)&lt;=tot;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        s0.clear();s1.clear();</span><br><span class="line">        <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        s0.add(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> u=(a[j]%(<span class="number">1</span>&lt;&lt;i))+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>((a[j]&gt;&gt;i)&amp;<span class="number">1</span>) cnt+=s0.find(u)+s1.find(tot)-s1.find(u),s1.add(u);</span><br><span class="line">            <span class="keyword">else</span> cnt+=s0.find(tot)-s0.find(u)+s1.find(u),s0.add(u);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt&amp;<span class="number">1</span>) ans+=(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -308,17 +297,19 @@
           
         
         <div class="post-tags">
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+            <a href="/tags/树状数组/" rel="tag"># 树状数组</a>
           
             <a href="/tags/题解/" rel="tag"># 题解</a>
           
-            <a href="/tags/省选-HAOI/" rel="tag"># 省选 - HAOI</a>
+            <a href="/tags/省选-TJOI/" rel="tag"># 省选 - TJOI</a>
+          
+            <a href="/tags/权值树状数组/" rel="tag"># 权值树状数组</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/【题解】HNOI2010合唱队/" rel="next" title="【题解】HNOI2010合唱队">
-                <i class="fa fa-chevron-left"></i> 【题解】HNOI2010合唱队
+              <a href="/【题解】HNOI2016序列/" rel="next" title="【题解】HNOI2016序列">
+                <i class="fa fa-chevron-left"></i> 【题解】HNOI2016序列
               </a>
             
           </div>
@@ -326,10 +317,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/【题解】洛谷P3712少女与战车/" rel="prev" title="【题解】洛谷P3712少女与战车">
-                【题解】洛谷P3712少女与战车 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
