@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"b2t":true,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="题目描述 将一个长度为n的序列分为k段，使得总价值最大，一段区间的价值表示为区间内不同数字的个数  n&amp;lt;=35000,k&amp;lt;=50">
+<meta name="keywords" content="题解,动态规划,线段树,CF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【题解】CF833B-The-Bakery">
+<meta property="og:url" content="http://yoursite.com/【题解】CF833B-The-Bakery/index.html">
+<meta property="og:site_name" content="子衿君&#39;blogs">
+<meta property="og:description" content="题目描述 将一个长度为n的序列分为k段，使得总价值最大，一段区间的价值表示为区间内不同数字的个数  n&amp;lt;=35000,k&amp;lt;=50">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-12T10:40:54.120Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【题解】CF833B-The-Bakery">
+<meta name="twitter:description" content="题目描述 将一个长度为n的序列分为k段，使得总价值最大，一段区间的价值表示为区间内不同数字的个数  n&amp;lt;=35000,k&amp;lt;=50">
+  <link rel="canonical" href="http://yoursite.com/【题解】CF833B-The-Bakery/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【题解】CF833B-The-Bakery | 子衿君'blogs</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">子衿君'blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一如既往，万事胜意</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】CF833B-The-Bakery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="子衿君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://images.cnblogs.com/cnblogs_com/zijinjun/1474809/o_TIM%E5%9B%BE%E7%89%8720190809070905.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子衿君'blogs">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">【题解】CF833B-The-Bakery
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-12 18:35:16 / 修改时间：18:40:54" itemprop="dateCreated datePublished" datetime="2019-08-12T18:35:16+08:00">2019-08-12</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
+<p>将一个长度为n的序列分为k段，使得总价值最大，一段区间的价值表示为区间内不同数字的个数
+<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="21.59ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 9295.8 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">n&lt;=35000,k&lt;=50</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E2-MJMAIN-3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"/>
+<path stroke-width="1" id="E2-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E2-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
+<path stroke-width="1" id="E2-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
+<path stroke-width="1" id="E2-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+<path stroke-width="1" id="E2-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
+<path stroke-width="1" id="E2-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E2-MJMATHI-6E" x="0" y="0"/>
+<g transform="translate(878,0)">
+ <use xlink:href="#E2-MJMAIN-3C"/>
+ <use xlink:href="#E2-MJMAIN-3D" x="778" y="0"/>
+</g>
+<g transform="translate(2713,0)">
+ <use xlink:href="#E2-MJMAIN-33"/>
+ <use xlink:href="#E2-MJMAIN-35" x="500" y="0"/>
+ <use xlink:href="#E2-MJMAIN-30" x="1001" y="0"/>
+ <use xlink:href="#E2-MJMAIN-30" x="1501" y="0"/>
+ <use xlink:href="#E2-MJMAIN-30" x="2002" y="0"/>
+</g>
+ <use xlink:href="#E2-MJMAIN-2C" x="5215" y="0"/>
+ <use xlink:href="#E2-MJMATHI-6B" x="5660" y="0"/>
+<g transform="translate(6460,0)">
+ <use xlink:href="#E2-MJMAIN-3C"/>
+ <use xlink:href="#E2-MJMAIN-3D" x="778" y="0"/>
+</g>
+<g transform="translate(8294,0)">
+ <use xlink:href="#E2-MJMAIN-35"/>
+ <use xlink:href="#E2-MJMAIN-30" x="500" y="0"/>
+</g>
+</g>
+</svg></span></p>
+<a id="more"></a>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
+<p>设 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.626ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 2422.5 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+<title id="MathJax-SVG-3-Title">f[i][j]</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E3-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E3-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E3-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E3-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E3-MJMATHI-6A" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E3-MJMATHI-66" x="0" y="0"/>
+ <use xlink:href="#E3-MJMAIN-5B" x="550" y="0"/>
+ <use xlink:href="#E3-MJMATHI-69" x="829" y="0"/>
+ <use xlink:href="#E3-MJMAIN-5D" x="1174" y="0"/>
+ <use xlink:href="#E3-MJMAIN-5B" x="1453" y="0"/>
+ <use xlink:href="#E3-MJMATHI-6A" x="1731" y="0"/>
+ <use xlink:href="#E3-MJMAIN-5D" x="2144" y="0"/>
+</g>
+</svg></span> 表示前 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.802ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 345.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
+<title id="MathJax-SVG-4-Title">i</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E4-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E4-MJMATHI-69" x="0" y="0"/>
+</g>
+</svg></span> 个数分为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.985ex" height="2.509ex" style="vertical-align: -0.671ex; margin-left: -0.027ex;" viewbox="-11.5 -791.3 424 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
+<title id="MathJax-SVG-5-Title">j</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E5-MJMATHI-6A" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E5-MJMATHI-6A" x="0" y="0"/>
+</g>
+</svg></span> 段的最大总价值</p>
+<p>转移很简单 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="37.988ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 16356.1 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-6-Title">
+<title id="MathJax-SVG-6-Title">f[i][j]=max(f[k][j−1]+g(k+1,i))</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E6-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E6-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E6-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E6-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E6-MJMATHI-6A" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"/>
+<path stroke-width="1" id="E6-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E6-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E6-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
+<path stroke-width="1" id="E6-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/>
+<path stroke-width="1" id="E6-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/>
+<path stroke-width="1" id="E6-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+<path stroke-width="1" id="E6-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E6-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E6-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E6-MJMATHI-67" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"/>
+<path stroke-width="1" id="E6-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
+<path stroke-width="1" id="E6-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E6-MJMATHI-66" x="0" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5B" x="550" y="0"/>
+ <use xlink:href="#E6-MJMATHI-69" x="829" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5D" x="1174" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5B" x="1453" y="0"/>
+ <use xlink:href="#E6-MJMATHI-6A" x="1731" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5D" x="2144" y="0"/>
+ <use xlink:href="#E6-MJMAIN-3D" x="2700" y="0"/>
+ <use xlink:href="#E6-MJMATHI-6D" x="3756" y="0"/>
+ <use xlink:href="#E6-MJMATHI-61" x="4635" y="0"/>
+ <use xlink:href="#E6-MJMATHI-78" x="5164" y="0"/>
+ <use xlink:href="#E6-MJMAIN-28" x="5737" y="0"/>
+ <use xlink:href="#E6-MJMATHI-66" x="6126" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5B" x="6677" y="0"/>
+ <use xlink:href="#E6-MJMATHI-6B" x="6955" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5D" x="7477" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5B" x="7755" y="0"/>
+ <use xlink:href="#E6-MJMATHI-6A" x="8034" y="0"/>
+ <use xlink:href="#E6-MJMAIN-2212" x="8668" y="0"/>
+ <use xlink:href="#E6-MJMAIN-31" x="9669" y="0"/>
+ <use xlink:href="#E6-MJMAIN-5D" x="10170" y="0"/>
+ <use xlink:href="#E6-MJMAIN-2B" x="10670" y="0"/>
+ <use xlink:href="#E6-MJMATHI-67" x="11671" y="0"/>
+ <use xlink:href="#E6-MJMAIN-28" x="12151" y="0"/>
+ <use xlink:href="#E6-MJMATHI-6B" x="12541" y="0"/>
+ <use xlink:href="#E6-MJMAIN-2B" x="13285" y="0"/>
+ <use xlink:href="#E6-MJMAIN-31" x="14285" y="0"/>
+ <use xlink:href="#E6-MJMAIN-2C" x="14786" y="0"/>
+ <use xlink:href="#E6-MJMATHI-69" x="15231" y="0"/>
+ <use xlink:href="#E6-MJMAIN-29" x="15577" y="0"/>
+ <use xlink:href="#E6-MJMAIN-29" x="15966" y="0"/>
+</g>
+</svg></span></p>
+<p>然后，在线段树上面维护区间加法</p>
+<p>同时，每次增加分段的数量的时候，重构线段树</p>
+<p>节点的值就是上一维的 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.385ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1027 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-7-Title">
+<title id="MathJax-SVG-7-Title">dp</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E7-MJMATHI-64" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
+<path stroke-width="1" id="E7-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E7-MJMATHI-64" x="0" y="0"/>
+ <use xlink:href="#E7-MJMATHI-70" x="523" y="0"/>
+</g>
+</svg></span> 值</p>
+<p>这样就可以利用线段树来优化（进行）<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.385ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1027 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-8-Title">
+<title id="MathJax-SVG-8-Title">dp</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E8-MJMATHI-64" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
+<path stroke-width="1" id="E8-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E8-MJMATHI-64" x="0" y="0"/>
+ <use xlink:href="#E8-MJMATHI-70" x="523" y="0"/>
+</g>
+</svg></span> 啦</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">400100</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ls id&lt;&lt;1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rs id&lt;&lt;1|1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mid ((l+r)&gt;&gt;1)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span><span class="keyword">int</span> ta,ma;&#125;t[N],str;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N],pre[N],nx[N],n,K;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;t[id].ma=max(t[ls].ma,t[rs].ma);&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t[id].ta)</span><br><span class="line">    &#123;</span><br><span class="line">    	t[ls].ta+=t[id].ta;</span><br><span class="line">    	t[rs].ta+=t[id].ta;</span><br><span class="line">    	t[ls].ma+=t[id].ta;</span><br><span class="line">    	t[rs].ma+=t[id].ta;</span><br><span class="line">        t[id].ta=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    t[id]=str;</span><br><span class="line">    <span class="keyword">if</span>(l==r)</span><br><span class="line">    &#123;</span><br><span class="line">        t[id].ma=f[l<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    build(l,mid,ls);</span><br><span class="line">    build(mid+<span class="number">1</span>,r,rs);</span><br><span class="line">    pushup(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> id,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l&gt;R||L&gt;r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R)</span><br><span class="line">    &#123;</span><br><span class="line">    	t[id].ta+=v;</span><br><span class="line">    	t[id].ma+=v;</span><br><span class="line">    	<span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(id);</span><br><span class="line">    change(l,mid,L,R,ls,v);</span><br><span class="line">    change(mid+<span class="number">1</span>,r,L,R,rs,v);</span><br><span class="line">    pushup(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l&gt;R||L&gt;r)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-0x3f3f3f3f</span>;</span><br><span class="line">    <span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R)</span><br><span class="line">        <span class="keyword">return</span> t[id].ma;</span><br><span class="line">    pushdown(id);</span><br><span class="line">    <span class="keyword">return</span> max(query(l,mid,L,R,ls),query(mid+<span class="number">1</span>,r,L,R,rs));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read(),K=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x=read();</span><br><span class="line">        pre[i]=nx[x];</span><br><span class="line">        nx[x]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=K;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        build(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=n;j++)</span><br><span class="line">            f[j]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            change(<span class="number">1</span>,n,pre[j]+<span class="number">1</span>,j,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">            f[j]=query(<span class="number">1</span>,n,i,j,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;f[n]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/题解/" rel="tag"># 题解</a>
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+            <a href="/tags/线段树/" rel="tag"># 线段树</a>
+          
+            <a href="/tags/CF/" rel="tag"># CF</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/【题解】TJOI2016排序/" rel="next" title="【题解】TJOI2016排序">
+                <i class="fa fa-chevron-left"></i> 【题解】TJOI2016排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="https://images.cnblogs.com/cnblogs_com/zijinjun/1474809/o_TIM%E5%9B%BE%E7%89%8720190809070905.jpg"
+      alt="子衿君">
+  <p class="site-author-name" itemprop="name">子衿君</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://Nikaidou-Shinku.github.io" title="https://Nikaidou-Shinku.github.io" rel="noopener" target="_blank">十项全能yurzhang</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.org/blog/contributation/" title="https://www.luogu.org/blog/contributation/" rel="noopener" target="_blank">红太阳BJpers2</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huyufeifei/" title="https://www.cnblogs.com/huyufeifei/" rel="noopener" target="_blank">没开挂的lbw-huyufeifei</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hb2018wfy.github.io/" title="https://hb2018wfy.github.io/" rel="noopener" target="_blank">神仙T哥TopCarry</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://fuyuky.github.io/" title="https://fuyuky.github.io/" rel="noopener" target="_blank">可持久化动态毒瘤仙人掌Fuyuki</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://ksmeow.moe/" title="https://ksmeow.moe/" rel="noopener" target="_blank">大佬KS</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考代码"><span class="nav-number">3.</span> <span class="nav-text">参考代码</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">子衿君</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+<script type="text/javascript">
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+  
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '23236802a69dbb34c211',
+    clientSecret: '56d277a785eb1cb1b50491ba0770e9e3d0c7698c',
+    repo: 'zijinjun.github.io',
+    owner: 'zijinjun',
+    admin: ['zijinjun'],
+    id: md5(location.pathname),
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+
+</body>
+</html>
