@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"b2t":true,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="题目描述 求  \large 2^{2^{2^{2^{2^{2^{2}}}}}} \% p \ （无限个2）                                     （   无   限   个     ）">
+<meta name="keywords" content="BZOJ,题解,数论,欧拉定理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【题解】BZOJ3884上帝与集合的正确用法">
+<meta property="og:url" content="http://yoursite.com/【题解】BZOJ3884上帝与集合的正确用法/index.html">
+<meta property="og:site_name" content="子衿君&#39;blogs">
+<meta property="og:description" content="题目描述 求  \large 2^{2^{2^{2^{2^{2^{2}}}}}} \% p \ （无限个2）                                     （   无   限   个     ）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-12T07:11:48.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【题解】BZOJ3884上帝与集合的正确用法">
+<meta name="twitter:description" content="题目描述 求  \large 2^{2^{2^{2^{2^{2^{2}}}}}} \% p \ （无限个2）                                     （   无   限   个     ）">
+  <link rel="canonical" href="http://yoursite.com/【题解】BZOJ3884上帝与集合的正确用法/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【题解】BZOJ3884上帝与集合的正确用法 | 子衿君'blogs</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">子衿君'blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一如既往，万事胜意</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】BZOJ3884上帝与集合的正确用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="子衿君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://images.cnblogs.com/cnblogs_com/zijinjun/1474809/o_TIM%E5%9B%BE%E7%89%8720190809070905.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子衿君'blogs">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">【题解】BZOJ3884上帝与集合的正确用法
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-10 16:19:37" itemprop="dateCreated datePublished" datetime="2019-08-10T16:19:37+08:00">2019-08-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-12 15:11:48" itemprop="dateModified" datetime="2019-08-12T15:11:48+08:00">2019-08-12</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
+<p>求</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="26.203ex" height="7.009ex" style="vertical-align: -1.505ex;" viewbox="0 -2370 11281.8 3017.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">\large 2^{2^{2^{2^{2^{2^{2}}}}}} \% p \ （无限个2）
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E2-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+<path stroke-width="1" id="E2-MJMAIN-25" d="M465 605Q428 605 394 614T340 632T319 641Q332 608 332 548Q332 458 293 403T202 347Q145 347 101 402T56 548Q56 637 101 693T202 750Q241 750 272 719Q359 642 464 642Q580 642 650 732Q662 748 668 749Q670 750 673 750Q682 750 688 743T693 726Q178 -47 170 -52Q166 -56 160 -56Q147 -56 142 -45Q137 -36 142 -27Q143 -24 363 304Q469 462 525 546T581 630Q528 605 465 605ZM207 385Q235 385 263 427T292 548Q292 617 267 664T200 712Q193 712 186 709T167 698T147 668T134 615Q132 595 132 548V527Q132 436 165 403Q183 385 203 385H207ZM500 146Q500 234 544 290T647 347Q699 347 737 292T776 146T737 0T646 -56Q590 -56 545 0T500 146ZM651 -18Q679 -18 707 24T736 146Q736 215 711 262T644 309Q637 309 630 306T611 295T591 265T578 212Q577 200 577 146V124Q577 -18 647 -18H651Z"/>
+<path stroke-width="1" id="E2-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use transform="scale(1.2)" xlink:href="#E2-MJMAIN-32" x="0" y="0"/>
+<g transform="translate(600,495)">
+ <use transform="scale(0.849)" xlink:href="#E2-MJMAIN-32" x="0" y="0"/>
+<g transform="translate(424,307)">
+ <use transform="scale(0.689)" xlink:href="#E2-MJMAIN-32" x="0" y="0"/>
+<g transform="translate(344,249)">
+ <use transform="scale(0.689)" xlink:href="#E2-MJMAIN-32" x="0" y="0"/>
+<g transform="translate(344,249)">
+ <use transform="scale(0.689)" xlink:href="#E2-MJMAIN-32" x="0" y="0"/>
+<g transform="translate(344,249)">
+ <use transform="scale(0.689)" xlink:href="#E2-MJMAIN-32" x="0" y="0"/>
+ <use transform="scale(0.689)" xlink:href="#E2-MJMAIN-32" x="500" y="362"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E2-MJMAIN-25" x="2691" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E2-MJMATHI-70" x="3524" y="0"/>
+<g transform="translate(5084,0)">
+<text font-family="monospace" stroke="none" transform="scale(86.1108) matrix(1 0 0 -1 0 0)">（</text>
+</g>
+<g transform="translate(6203,0)">
+<text font-family="monospace" stroke="none" transform="scale(86.1108) matrix(1 0 0 -1 0 0)">无</text>
+</g>
+<g transform="translate(7322,0)">
+<text font-family="monospace" stroke="none" transform="scale(86.1108) matrix(1 0 0 -1 0 0)">限</text>
+</g>
+<g transform="translate(8442,0)">
+<text font-family="monospace" stroke="none" transform="scale(86.1108) matrix(1 0 0 -1 0 0)">个</text>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E2-MJMAIN-32" x="7968" y="0"/>
+<g transform="translate(10162,0)">
+<text font-family="monospace" stroke="none" transform="scale(86.1108) matrix(1 0 0 -1 0 0)">）</text>
+</g>
+</g>
+</svg></span></p>
+<a id="more"></a>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
+<p>我们这个题目肯定是不能直接求的，我们考虑欧拉定理</p>
+<p>首先我们知道欧拉定理的内容</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="23.09ex" height="3.843ex" style="vertical-align: -1.005ex;" viewbox="0 -1221.9 9941.4 1654.5" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+<title id="MathJax-SVG-3-Title">\large 1 ≡a^{\varphi(p)}\pmod p
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E3-MJMAIN-2261" d="M56 444Q56 457 70 464H707Q722 456 722 444Q722 430 706 424H72Q56 429 56 444ZM56 237T56 250T70 270H707Q722 262 722 250T707 230H70Q56 237 56 250ZM56 56Q56 71 72 76H706Q722 70 722 56Q722 44 707 36H70Q56 43 56 56Z"/>
+<path stroke-width="1" id="E3-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
+<path stroke-width="1" id="E3-MJMATHI-3C6" d="M92 210Q92 176 106 149T142 108T185 85T220 72L235 70L237 71L250 112Q268 170 283 211T322 299T370 375T429 423T502 442Q547 442 582 410T618 302Q618 224 575 152T457 35T299 -10Q273 -10 273 -12L266 -48Q260 -83 252 -125T241 -179Q236 -203 215 -212Q204 -218 190 -218Q159 -215 159 -185Q159 -175 214 -2L209 0Q204 2 195 5T173 14T147 28T120 46T94 71T71 103T56 142T50 190Q50 238 76 311T149 431H162Q183 431 183 423Q183 417 175 409Q134 361 114 300T92 210ZM574 278Q574 320 550 344T486 369Q437 369 394 329T323 218Q309 184 295 109L286 64Q304 62 306 62Q423 62 498 131T574 278Z"/>
+<path stroke-width="1" id="E3-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/>
+<path stroke-width="1" id="E3-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
+<path stroke-width="1" id="E3-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/>
+<path stroke-width="1" id="E3-MJMAIN-6D" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q351 442 364 440T387 434T406 426T421 417T432 406T441 395T448 384T452 374T455 366L457 361L460 365Q463 369 466 373T475 384T488 397T503 410T523 422T546 432T572 439T603 442Q729 442 740 329Q741 322 741 190V104Q741 66 743 59T754 49Q775 46 803 46H819V0H811L788 1Q764 2 737 2T699 3Q596 3 587 0H579V46H595Q656 46 656 62Q657 64 657 200Q656 335 655 343Q649 371 635 385T611 402T585 404Q540 404 506 370Q479 343 472 315T464 232V168V108Q464 78 465 68T468 55T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"/>
+<path stroke-width="1" id="E3-MJMAIN-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"/>
+<path stroke-width="1" id="E3-MJMAIN-64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-31" x="0" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-2261" x="778" y="0"/>
+<g transform="translate(2201,0)">
+ <use transform="scale(1.2)" xlink:href="#E3-MJMATHI-61" x="0" y="0"/>
+<g transform="translate(635,495)">
+ <use transform="scale(0.849)" xlink:href="#E3-MJMATHI-3C6" x="0" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E3-MJMAIN-28" x="654" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E3-MJMATHI-70" x="1044" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E3-MJMAIN-29" x="1547" y="0"/>
+</g>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-28" x="4667" y="0"/>
+<g transform="translate(6067,0)">
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-6D"/>
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-6F" x="833" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-64" x="1334" y="0"/>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E3-MJMATHI-70" x="7391" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E3-MJMAIN-29" x="7894" y="0"/>
+</g>
+</svg></span></p>
+<p>这个直接在这里是用不了的，我们需要知道拓展欧拉定理</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="49.257ex" height="11.343ex" style="vertical-align: -5.005ex;" viewbox="0 -2728.8 21208 4883.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
+<title id="MathJax-SVG-4-Title">\large a^b \bmod p=\left \{
+\begin{aligned}
+&amp;a^{b \bmod \varphi (p) +\varphi (p)} &amp;b\geq \varphi (p)\\\\
+&amp;a^b &amp;b&lt;\varphi (p)
+\end{aligned}
+\right.
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E5-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
+<path stroke-width="1" id="E5-MJMATHI-62" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"/>
+<path stroke-width="1" id="E5-MJMAIN-6D" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q351 442 364 440T387 434T406 426T421 417T432 406T441 395T448 384T452 374T455 366L457 361L460 365Q463 369 466 373T475 384T488 397T503 410T523 422T546 432T572 439T603 442Q729 442 740 329Q741 322 741 190V104Q741 66 743 59T754 49Q775 46 803 46H819V0H811L788 1Q764 2 737 2T699 3Q596 3 587 0H579V46H595Q656 46 656 62Q657 64 657 200Q656 335 655 343Q649 371 635 385T611 402T585 404Q540 404 506 370Q479 343 472 315T464 232V168V108Q464 78 465 68T468 55T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"/>
+<path stroke-width="1" id="E5-MJMAIN-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"/>
+<path stroke-width="1" id="E5-MJMAIN-64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z"/>
+<path stroke-width="1" id="E5-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
+<path stroke-width="1" id="E5-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E5-MJMAIN-7B" d="M434 -231Q434 -244 428 -250H410Q281 -250 230 -184Q225 -177 222 -172T217 -161T213 -148T211 -133T210 -111T209 -84T209 -47T209 0Q209 21 209 53Q208 142 204 153Q203 154 203 155Q189 191 153 211T82 231Q71 231 68 234T65 250T68 266T82 269Q116 269 152 289T203 345Q208 356 208 377T209 529V579Q209 634 215 656T244 698Q270 724 324 740Q361 748 377 749Q379 749 390 749T408 750H428Q434 744 434 732Q434 719 431 716Q429 713 415 713Q362 710 332 689T296 647Q291 634 291 499V417Q291 370 288 353T271 314Q240 271 184 255L170 250L184 245Q202 239 220 230T262 196T290 137Q291 131 291 1Q291 -134 296 -147Q306 -174 339 -192T415 -213Q429 -213 431 -216Q434 -219 434 -231Z"/>
+<path stroke-width="1" id="E5-MJMATHI-3C6" d="M92 210Q92 176 106 149T142 108T185 85T220 72L235 70L237 71L250 112Q268 170 283 211T322 299T370 375T429 423T502 442Q547 442 582 410T618 302Q618 224 575 152T457 35T299 -10Q273 -10 273 -12L266 -48Q260 -83 252 -125T241 -179Q236 -203 215 -212Q204 -218 190 -218Q159 -215 159 -185Q159 -175 214 -2L209 0Q204 2 195 5T173 14T147 28T120 46T94 71T71 103T56 142T50 190Q50 238 76 311T149 431H162Q183 431 183 423Q183 417 175 409Q134 361 114 300T92 210ZM574 278Q574 320 550 344T486 369Q437 369 394 329T323 218Q309 184 295 109L286 64Q304 62 306 62Q423 62 498 131T574 278Z"/>
+<path stroke-width="1" id="E5-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/>
+<path stroke-width="1" id="E5-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/>
+<path stroke-width="1" id="E5-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E5-MJMAIN-2265" d="M83 616Q83 624 89 630T99 636Q107 636 253 568T543 431T687 361Q694 356 694 346T687 331Q685 329 395 192L107 56H101Q83 58 83 76Q83 77 83 79Q82 86 98 95Q117 105 248 167Q326 204 378 228L626 346L360 472Q291 505 200 548Q112 589 98 597T83 616ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"/>
+<path stroke-width="1" id="E5-MJMAIN-3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"/>
+<path stroke-width="1" id="E5-MJSZ4-23A7" d="M712 899L718 893V876V865Q718 854 704 846Q627 793 577 710T510 525Q510 524 509 521Q505 493 504 349Q504 345 504 334Q504 277 504 240Q504 -2 503 -4Q502 -8 494 -9T444 -10Q392 -10 390 -9Q387 -8 386 -5Q384 5 384 230Q384 262 384 312T383 382Q383 481 392 535T434 656Q510 806 664 892L677 899H712Z"/>
+<path stroke-width="1" id="E5-MJSZ4-23A9" d="M718 -893L712 -899H677L666 -893Q542 -825 468 -714T385 -476Q384 -466 384 -282Q384 3 385 5L389 9Q392 10 444 10Q486 10 494 9T503 4Q504 2 504 -239V-310V-366Q504 -470 508 -513T530 -609Q546 -657 569 -698T617 -767T661 -812T699 -843T717 -856T718 -876V-893Z"/>
+<path stroke-width="1" id="E5-MJSZ4-23A8" d="M389 1159Q391 1160 455 1160Q496 1160 498 1159Q501 1158 502 1155Q504 1145 504 924Q504 691 503 682Q494 549 425 439T243 259L229 250L243 241Q349 175 421 66T503 -182Q504 -191 504 -424Q504 -600 504 -629T499 -659H498Q496 -660 444 -660T390 -659Q387 -658 386 -655Q384 -645 384 -425V-282Q384 -176 377 -116T342 10Q325 54 301 92T255 155T214 196T183 222T171 232Q170 233 170 250T171 268Q171 269 191 284T240 331T300 407T354 524T383 679Q384 691 384 925Q384 1152 385 1155L389 1159Z"/>
+<path stroke-width="1" id="E5-MJSZ4-23AA" d="M384 150V266Q384 304 389 309Q391 310 455 310Q496 310 498 309Q502 308 503 298Q504 283 504 150Q504 32 504 12T499 -9H498Q496 -10 444 -10T390 -9Q386 -8 385 2Q384 17 384 150Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-61" x="0" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-62" x="748" y="583"/>
+<g transform="translate(1397,0)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-6D"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-6F" x="833" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-64" x="1334" y="0"/>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-70" x="3286" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-3D" x="4067" y="0"/>
+<g transform="translate(6149,0)">
+<g transform="translate(0,2610)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJSZ4-23A7" x="0" y="-900"/>
+<g transform="translate(0,-1259.3123965346786) scale(1,0.5790793047553016)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJSZ4-23AA"/>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E5-MJSZ4-23A8" x="0" y="-2176"/>
+<g transform="translate(0,-3569.4686398921276) scale(1,0.5790793047553016)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJSZ4-23AA"/>
+</g>
+ <use transform="scale(1.2)" xlink:href="#E5-MJSZ4-23A9" x="0" y="-2951"/>
+</g>
+<g transform="translate(1234,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,1477)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-61" x="0" y="0"/>
+<g transform="translate(635,495)">
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-62" x="0" y="0"/>
+<g transform="translate(642,0)">
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-6D"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-6F" x="833" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-64" x="1334" y="0"/>
+</g>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-3C6" x="2974" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-28" x="3629" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-70" x="4018" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-29" x="4522" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-2B" x="4911" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-3C6" x="5690" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-28" x="6344" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-70" x="6734" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMAIN-29" x="7237" y="0"/>
+</g>
+</g>
+<g transform="translate(0,-1709)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-61" x="0" y="0"/>
+ <use transform="scale(0.849)" xlink:href="#E5-MJMATHI-62" x="748" y="583"/>
+</g>
+</g>
+<g transform="translate(9216,0)">
+<g transform="translate(0,1477)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-62" x="0" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-2265" x="707" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-3C6" x="1763" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-28" x="2418" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-70" x="2807" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-29" x="3311" y="0"/>
+</g>
+<g transform="translate(0,-1709)">
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-62" x="0" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-3C" x="707" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-3C6" x="1763" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-28" x="2418" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMATHI-70" x="2807" y="0"/>
+ <use transform="scale(1.2)" xlink:href="#E5-MJMAIN-29" x="3311" y="0"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg></span></p>
+<p>然后就直接递归求解就可以了</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">phi</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll ret=x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i*i&lt;=x;++i)</span><br><span class="line">        <span class="keyword">if</span>(x%i==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ret=ret/i*(i<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">while</span>(x%i==<span class="number">0</span>)x/=i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;<span class="number">1</span>)ret=ret/x*(x<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">fpow</span><span class="params">(ll a,ll b,ll p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll s=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)s=<span class="number">1l</span>l*s*a%p;a=<span class="number">1l</span>l*a*a%p;b&gt;&gt;=<span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">Query</span><span class="params">(<span class="keyword">int</span> P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(P==<span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    ll x=phi(P);</span><br><span class="line">    <span class="keyword">return</span> fpow(<span class="number">2</span>,Query(x)+x,P);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T=read();</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">int</span> x=read();</span><br><span class="line">    	<span class="built_in">cout</span>&lt;&lt;Query(x)&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+          
+            <a href="/tags/题解/" rel="tag"># 题解</a>
+          
+            <a href="/tags/数论/" rel="tag"># 数论</a>
+          
+            <a href="/tags/欧拉定理/" rel="tag"># 欧拉定理</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/【题解】HNOI2015亚瑟王/" rel="next" title="【题解】HNOI2015亚瑟王">
+                <i class="fa fa-chevron-left"></i> 【题解】HNOI2015亚瑟王
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/【题解】SHOI2008堵塞的交通/" rel="prev" title="【题解】SHOI2008堵塞的交通">
+                【题解】SHOI2008堵塞的交通 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="https://images.cnblogs.com/cnblogs_com/zijinjun/1474809/o_TIM%E5%9B%BE%E7%89%8720190809070905.jpg"
+      alt="子衿君">
+  <p class="site-author-name" itemprop="name">子衿君</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://Nikaidou-Shinku.github.io" title="https://Nikaidou-Shinku.github.io" rel="noopener" target="_blank">十项全能yurzhang</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.org/blog/contributation/" title="https://www.luogu.org/blog/contributation/" rel="noopener" target="_blank">红太阳BJpers2</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huyufeifei/" title="https://www.cnblogs.com/huyufeifei/" rel="noopener" target="_blank">没开挂的lbw-huyufeifei</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hb2018wfy.github.io/" title="https://hb2018wfy.github.io/" rel="noopener" target="_blank">神仙T哥TopCarry</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://fuyuky.github.io/" title="https://fuyuky.github.io/" rel="noopener" target="_blank">可持久化动态毒瘤仙人掌Fuyuki</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://ksmeow.moe/" title="https://ksmeow.moe/" rel="noopener" target="_blank">大佬KS</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考代码"><span class="nav-number">3.</span> <span class="nav-text">参考代码</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">子衿君</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+<script type="text/javascript">
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+  
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '23236802a69dbb34c211',
+    clientSecret: '56d277a785eb1cb1b50491ba0770e9e3d0c7698c',
+    repo: 'zijinjun.github.io',
+    owner: 'zijinjun',
+    admin: ['zijinjun'],
+    id: md5(location.pathname),
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+
+</body>
+</html>
