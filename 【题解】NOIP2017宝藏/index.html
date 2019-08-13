@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="题目描述 一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)">
-<meta name="keywords" content="题解,动态规划,省选 - HAOI">
+  <meta name="description" content="题目描述 参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。">
+<meta name="keywords" content="题解,NOIP,状压,记忆化搜索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【题解】haoi2011problem a">
-<meta property="og:url" content="http://yoursite.com/【题解】HAOI2011problem a/index.html">
+<meta property="og:title" content="【题解】NOIP2017宝藏">
+<meta property="og:url" content="http://yoursite.com/【题解】NOIP2017宝藏/index.html">
 <meta property="og:site_name" content="子衿君&#39;blogs">
-<meta property="og:description" content="题目描述 一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)">
+<meta property="og:description" content="题目描述 参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-07T07:37:32.389Z">
+<meta property="og:updated_time" content="2019-08-13T11:59:34.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【题解】haoi2011problem a">
-<meta name="twitter:description" content="题目描述 一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)">
-  <link rel="canonical" href="http://yoursite.com/【题解】HAOI2011problem a/">
+<meta name="twitter:title" content="【题解】NOIP2017宝藏">
+<meta name="twitter:description" content="题目描述 参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。">
+  <link rel="canonical" href="http://yoursite.com/【题解】NOIP2017宝藏/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>【题解】haoi2011problem a | 子衿君'blogs</title>
+  <title>【题解】NOIP2017宝藏 | 子衿君'blogs</title>
   
 
 
@@ -217,7 +217,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】HAOI2011problem a/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】NOIP2017宝藏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="子衿君">
@@ -231,7 +231,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">【题解】haoi2011problem a
+          <h1 class="post-title" itemprop="name headline">【题解】NOIP2017宝藏
 
               
             
@@ -251,7 +251,7 @@
                 
               
 
-              <time title="创建时间：2019-08-07 07:52:27 / 修改时间：15:37:32" itemprop="dateCreated datePublished" datetime="2019-08-07T07:52:27+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-13 19:55:48 / 修改时间：19:59:34" itemprop="dateCreated datePublished" datetime="2019-08-13T19:55:48+08:00">2019-08-13</time>
             </span>
           
             
@@ -280,23 +280,34 @@
 
       
         <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
-<p>一次考试共有n个人参加，第i个人说：“有ai个人分数比我高，bi个人分数比我低。”问最少有几个人没有说真话(可能有相同的分数)</p>
+<p>参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。</p>
 <a id="more"></a>
+<p>小明决心亲自前往挖掘所有宝藏屋中的宝藏。但是，每个宝藏屋距离地面都很远，也就是说，从地面打通一条到某个宝藏屋的道路是很困难的，而开发宝藏屋之间的道路则相对容易很多。
+小明的决心感动了考古挖掘的赞助商， 赞助商决定免费赞助他打通一条从地面到某个宝藏屋的通道，通往哪个宝藏屋则由小明来决定。
+在此基础上， 小明还需要考虑如何开凿宝藏屋之间的道路。已经开凿出的道路可以任意通行不消耗代价。每开凿出一条新道路，小明就会与考古队一起挖掘出由该条道路所能到达的宝藏屋的宝藏。另外，小明不想开发无用道路，即两个已经被挖掘过的宝藏屋之间的道路无需再开发。
+新开发一条道路的代价是：
+这条道路的长度 x 从赞助商帮你打通的宝藏屋到这条道路起点的宝藏屋所经过的宝藏屋的数量（包括赞助商帮你打通的宝藏屋和这条道路起点的宝藏屋）。
+请你编写程序为小明选定由赞助商打通的宝藏屋和之后开凿的道路，使得工程总代价最小，并输出这个最小值。</p>
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
-<p>这个题目，我们考虑 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.67ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1580 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">DP</title>
+<p>一看数据范围只有 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="6.818ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 2935.6 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">n=12</title>
 <defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMATHI-44" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"/>
-<path stroke-width="1" id="E2-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
+<path stroke-width="1" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E2-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E2-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E2-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMATHI-44" x="0" y="0"/>
- <use xlink:href="#E2-MJMATHI-50" x="828" y="0"/>
+ <use xlink:href="#E2-MJMATHI-6E" x="0" y="0"/>
+ <use xlink:href="#E2-MJMAIN-3D" x="878" y="0"/>
+<g transform="translate(1934,0)">
+ <use xlink:href="#E2-MJMAIN-31"/>
+ <use xlink:href="#E2-MJMAIN-32" x="500" y="0"/>
 </g>
-</svg></span> 来求</p>
-<p>转化为带权区间覆盖问题</p>
+</g>
+</svg></span> 直接考虑状压，然后发现状压不太好写，直接记忆化搜索一下就好了</p>
 <h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> tot,ans,Ans,n,f[N];</span><br><span class="line"><span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;,<span class="keyword">int</span>&gt; ma;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; h[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a=read(),b=read();</span><br><span class="line">        <span class="keyword">int</span> l=a+<span class="number">1</span>,r=n-b;</span><br><span class="line">        <span class="keyword">if</span>(l&gt;r)<span class="keyword">continue</span>;</span><br><span class="line">        ma[make_pair(l,r)]++;</span><br><span class="line">        <span class="keyword">if</span>(ma[make_pair(l,r)]==<span class="number">1</span>)h[r].push_back(l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i]=f[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;h[i].size();++j)</span><br><span class="line">            f[i]=max(f[i],f[h[i][j]<span class="number">-1</span>]+min(i-h[i][j]+<span class="number">1</span>,ma[make_pair(h[i][j],i)]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,n-f[n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re register</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    re <span class="keyword">int</span> x=<span class="number">0</span>,f(<span class="number">1</span>);re <span class="keyword">char</span> ch=gc;</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>) &#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;ch=gc;&#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>) x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(ch^<span class="number">48</span>),ch=gc;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">15</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[N][N],cnt,n,m,f[<span class="number">5050</span>],ans=<span class="number">1e9</span>+<span class="number">10</span>,dis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)<span class="keyword">if</span>(s&amp;(<span class="number">1</span>&lt;&lt;i<span class="number">-1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="keyword">if</span>(a[i][j]&lt;<span class="number">1e9</span>&amp;&amp;(!(s&amp;(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>)))&amp;&amp;(dis[i]+<span class="number">1</span>)*a[i][j]+f[s]&lt;f[(s|(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>))])</span><br><span class="line">            &#123;</span><br><span class="line">                dis[j]=dis[i]+<span class="number">1</span>;</span><br><span class="line">                f[s|(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>)]=(dis[i]+<span class="number">1</span>)*a[i][j]+f[s];</span><br><span class="line">                dfs(s|(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">127</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=read(),v=read(),w=read();</span><br><span class="line">        a[u][v]=a[v][u]=min(a[u][v],w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(dis,<span class="number">0</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">63</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        f[<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>)]=<span class="number">0</span>;</span><br><span class="line">        dfs(<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>));</span><br><span class="line">        ans=min(ans,f[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -310,15 +321,17 @@
         <div class="post-tags">
             <a href="/tags/题解/" rel="tag"># 题解</a>
           
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+            <a href="/tags/NOIP/" rel="tag"># NOIP</a>
           
-            <a href="/tags/省选-HAOI/" rel="tag"># 省选 - HAOI</a>
+            <a href="/tags/状压/" rel="tag"># 状压</a>
+          
+            <a href="/tags/记忆化搜索/" rel="tag"># 记忆化搜索</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/【题解】HNOI2010合唱队/" rel="next" title="【题解】HNOI2010合唱队">
-                <i class="fa fa-chevron-left"></i> 【题解】HNOI2010合唱队
+              <a href="/【题解】CF833B-The-Bakery/" rel="next" title="【题解】CF833B-The-Bakery">
+                <i class="fa fa-chevron-left"></i> 【题解】CF833B-The-Bakery
               </a>
             
           </div>
@@ -326,10 +339,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/【题解】洛谷P3712少女与战车/" rel="prev" title="【题解】洛谷P3712少女与战车">
-                【题解】洛谷P3712少女与战车 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
