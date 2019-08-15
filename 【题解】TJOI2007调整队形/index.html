@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="神仙的文化课学习资料，给自己退役提前做准备">
-<meta name="keywords" content="资料,文化课">
+  <meta name="description" content="题目描述">
+<meta name="keywords" content="题解,动态规划,省选 - TJOI,区间DP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【资料】神仙的文化课资料">
-<meta property="og:url" content="http://yoursite.com/【资料】神仙的文化课资料/index.html">
+<meta property="og:title" content="【题解】TJOI2007调整队形">
+<meta property="og:url" content="http://yoursite.com/【题解】TJOI2007调整队形/index.html">
 <meta property="og:site_name" content="子衿君&#39;blogs">
-<meta property="og:description" content="神仙的文化课学习资料，给自己退役提前做准备">
+<meta property="og:description" content="题目描述">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-08T05:55:57.383Z">
+<meta property="og:updated_time" content="2019-08-15T06:34:00.637Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【资料】神仙的文化课资料">
-<meta name="twitter:description" content="神仙的文化课学习资料，给自己退役提前做准备">
-  <link rel="canonical" href="http://yoursite.com/【资料】神仙的文化课资料/">
+<meta name="twitter:title" content="【题解】TJOI2007调整队形">
+<meta name="twitter:description" content="题目描述">
+  <link rel="canonical" href="http://yoursite.com/【题解】TJOI2007调整队形/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>【资料】神仙的文化课资料 | 子衿君'blogs</title>
+  <title>【题解】TJOI2007调整队形 | 子衿君'blogs</title>
   
 
 
@@ -217,7 +217,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【资料】神仙的文化课资料/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】TJOI2007调整队形/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="子衿君">
@@ -231,7 +231,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">【资料】神仙的文化课资料
+          <h1 class="post-title" itemprop="name headline">【题解】TJOI2007调整队形
 
               
             
@@ -251,7 +251,7 @@
                 
               
 
-              <time title="创建时间：2019-08-08 09:36:15 / 修改时间：13:55:57" itemprop="dateCreated datePublished" datetime="2019-08-08T09:36:15+08:00">2019-08-08</time>
+              <time title="创建时间：2019-08-15 14:32:14 / 修改时间：14:34:00" itemprop="dateCreated datePublished" datetime="2019-08-15T14:32:14+08:00">2019-08-15</time>
             </span>
           
             
@@ -279,29 +279,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>神仙的文化课学习资料，给自己退役提前做准备</p>
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
 <a id="more"></a>
-<p><a href="https://magolor.cn/2019/06/04/2019-06-04-blog-04/" target="_blank" rel="noopener">物理</a></p>
-<p><a href="https://magolor.cn/2019/06/04/2019-06-04-blog-03/" target="_blank" rel="noopener">数学</a></p>
-<p><a href="https://magolor.cn/2019/06/04/2019-06-04-blog-02/" target="_blank" rel="noopener">化学</a></p>
-<p><a href="https://magolor.cn/2019/06/04/2019-06-04-blog-01/" target="_blank" rel="noopener">生物</a></p>
-<p>如果网页卡的话可以看 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.41ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 2329.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">PDF</title>
+<p>学校艺术节上，规定合唱队要参加比赛，各个队员的衣服颜色不能很混乱：合唱队员应排成一横排，且衣服颜色必须是左右对称的。</p>
+<p>例如：“红蓝绿蓝红”或“红蓝绿绿蓝红”都是符合的，而“红蓝绿红”或“蓝绿蓝红”就不符合要求。</p>
+<p>合唱队人数自然很多，仅现有的同学就可能会有3000个。老师希望将合唱队调整得符合要求，但想要调整尽量少，减少麻烦。以下任一动作认为是一次调整：</p>
+<p>1、在队伍左或右边加一个人（衣服颜色依要求而定）；</p>
+<p>2、在队伍中任两个人中间插入一个人（衣服颜色依要求而定）；</p>
+<p>3、剔掉一个人；</p>
+<p>4、让一个人换衣服颜色；</p>
+<p>老师想知道就目前的队形最少的调整次数是多少，请你编一个程序来回答他。</p>
+<p>因为加入合唱队很热门，你可以认为人数是无限的，即随时想加一个人都能找到人。同时衣服颜色也是任意的。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
+<p>这个直接考虑区间 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.67ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1580 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">DP</title>
 <defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
 <path stroke-width="1" id="E2-MJMATHI-44" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"/>
-<path stroke-width="1" id="E2-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/>
+<path stroke-width="1" id="E2-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMATHI-50" x="0" y="0"/>
- <use xlink:href="#E2-MJMATHI-44" x="751" y="0"/>
- <use xlink:href="#E2-MJMATHI-46" x="1580" y="0"/>
+ <use xlink:href="#E2-MJMATHI-44" x="0" y="0"/>
+ <use xlink:href="#E2-MJMATHI-50" x="828" y="0"/>
 </g>
-</svg></span> 版本的，不过这个会更新</p>
-<p><a href="https://magolor.cn/files/physics.pdf" target="_blank" rel="noopener">物理</a></p>
-<p><a href="https://magolor.cn/files/maths.pdf" target="_blank" rel="noopener">数学</a></p>
-<p><a href="https://magolor.cn/files/chemistry.pdf" target="_blank" rel="noopener">化学</a></p>
-<p><a href="https://magolor.cn/files/biology.pdf" target="_blank" rel="noopener">生物</a></p>
+</svg></span> 处理的时候注意判断一下边界条件就可以了</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    register int x(0),f(1);register char c(gc);</span><br><span class="line">    <span class="keyword">while</span>(c&gt;<span class="string">'9'</span>||c&lt;<span class="string">'0'</span>)f=c==<span class="string">'-'</span>?<span class="number">-1</span>:<span class="number">1</span>,c=gc;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)x=x*<span class="number">10</span>+c<span class="number">-48</span>,c=gc;</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">3030</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[N],f[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">127</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=read();</span><br><span class="line">        f[i][i]=<span class="number">0</span>;</span><br><span class="line">        f[i<span class="number">-1</span>][i]=!(a[i]==a[i<span class="number">-1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;++len)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n-len+<span class="number">1</span>;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j=i+len<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[j]==a[i]) f[i][j]=min(f[i+<span class="number">1</span>][j<span class="number">-1</span>],f[i][j]);</span><br><span class="line">            f[i][j]=min(f[i][j],f[i+<span class="number">1</span>][j<span class="number">-1</span>]+<span class="number">1</span>);</span><br><span class="line">            f[i][j]=min(f[i][j],f[i][j<span class="number">-1</span>]+<span class="number">1</span>);</span><br><span class="line">            f[i][j]=min(f[i][j],f[i+<span class="number">1</span>][j]+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;f[<span class="number">1</span>][n]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -313,15 +315,19 @@
           
         
         <div class="post-tags">
-            <a href="/tags/资料/" rel="tag"># 资料</a>
+            <a href="/tags/题解/" rel="tag"># 题解</a>
           
-            <a href="/tags/文化课/" rel="tag"># 文化课</a>
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+            <a href="/tags/省选-TJOI/" rel="tag"># 省选 - TJOI</a>
+          
+            <a href="/tags/区间DP/" rel="tag"># 区间DP</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/【题解】HNOI2015菜肴制作/" rel="next" title="【题解】HNOI2015菜肴制作">
-                <i class="fa fa-chevron-left"></i> 【题解】HNOI2015菜肴制作
+              <a href="/【题解】SCOI2009粉刷匠/" rel="next" title="【题解】SCOI2009粉刷匠">
+                <i class="fa fa-chevron-left"></i> 【题解】SCOI2009粉刷匠
               </a>
             
           </div>
@@ -329,10 +335,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/【题解】HN省选集训2018水果拼盘/" rel="prev" title="【题解】HN省选集训2018水果拼盘">
-                【题解】HN省选集训2018水果拼盘 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -365,8 +367,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -531,6 +542,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考代码"><span class="nav-number">3.</span> <span class="nav-text">参考代码</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
