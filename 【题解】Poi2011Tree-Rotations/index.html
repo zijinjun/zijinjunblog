@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="题目描述 参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。">
-<meta name="keywords" content="题解,NOIP,状压,记忆化搜索">
+  <meta name="description" content="题目描述 现在有一棵二叉树，所有非叶子节点都有两个孩子。在每个叶子节点上有一个权值(有  n         个叶子节点，满足这些权值为  1..n                 的一个排列)。可以任意交换每个非叶子节点的左右孩子。">
+<meta name="keywords" content="题解,POI,线段树合并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【题解】NOIP2017宝藏">
-<meta property="og:url" content="http://yoursite.com/【题解】NOIP2017宝藏/index.html">
+<meta property="og:title" content="【题解】Poi2011Tree-Rotations">
+<meta property="og:url" content="http://yoursite.com/【题解】Poi2011Tree-Rotations/index.html">
 <meta property="og:site_name" content="子衿君&#39;blogs">
-<meta property="og:description" content="题目描述 参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。">
+<meta property="og:description" content="题目描述 现在有一棵二叉树，所有非叶子节点都有两个孩子。在每个叶子节点上有一个权值(有  n         个叶子节点，满足这些权值为  1..n                 的一个排列)。可以任意交换每个非叶子节点的左右孩子。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-13T11:59:34.901Z">
+<meta property="og:updated_time" content="2019-08-30T05:21:06.913Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【题解】NOIP2017宝藏">
-<meta name="twitter:description" content="题目描述 参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。">
-  <link rel="canonical" href="http://yoursite.com/【题解】NOIP2017宝藏/">
+<meta name="twitter:title" content="【题解】Poi2011Tree-Rotations">
+<meta name="twitter:description" content="题目描述 现在有一棵二叉树，所有非叶子节点都有两个孩子。在每个叶子节点上有一个权值(有  n         个叶子节点，满足这些权值为  1..n                 的一个排列)。可以任意交换每个非叶子节点的左右孩子。">
+  <link rel="canonical" href="http://yoursite.com/【题解】Poi2011Tree-Rotations/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>【题解】NOIP2017宝藏 | 子衿君'blogs</title>
+  <title>【题解】Poi2011Tree-Rotations | 子衿君'blogs</title>
   
 
 
@@ -217,7 +217,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】NOIP2017宝藏/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【题解】Poi2011Tree-Rotations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="子衿君">
@@ -231,7 +231,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">【题解】NOIP2017宝藏
+          <h1 class="post-title" itemprop="name headline">【题解】Poi2011Tree-Rotations
 
               
             
@@ -251,7 +251,7 @@
                 
               
 
-              <time title="创建时间：2019-08-13 19:55:48 / 修改时间：19:59:34" itemprop="dateCreated datePublished" datetime="2019-08-13T19:55:48+08:00">2019-08-13</time>
+              <time title="创建时间：2019-08-30 13:17:56 / 修改时间：13:21:06" itemprop="dateCreated datePublished" datetime="2019-08-30T13:17:56+08:00">2019-08-30</time>
             </span>
           
             
@@ -280,34 +280,47 @@
 
       
         <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
-<p>参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 n 个深埋在地下的宝藏屋，也给出了这 n 个宝藏屋之间可供开发的 m 条道路和它们的长度。</p>
-<a id="more"></a>
-<p>小明决心亲自前往挖掘所有宝藏屋中的宝藏。但是，每个宝藏屋距离地面都很远，也就是说，从地面打通一条到某个宝藏屋的道路是很困难的，而开发宝藏屋之间的道路则相对容易很多。
-小明的决心感动了考古挖掘的赞助商， 赞助商决定免费赞助他打通一条从地面到某个宝藏屋的通道，通往哪个宝藏屋则由小明来决定。
-在此基础上， 小明还需要考虑如何开凿宝藏屋之间的道路。已经开凿出的道路可以任意通行不消耗代价。每开凿出一条新道路，小明就会与考古队一起挖掘出由该条道路所能到达的宝藏屋的宝藏。另外，小明不想开发无用道路，即两个已经被挖掘过的宝藏屋之间的道路无需再开发。
-新开发一条道路的代价是：
-这条道路的长度 x 从赞助商帮你打通的宝藏屋到这条道路起点的宝藏屋所经过的宝藏屋的数量（包括赞助商帮你打通的宝藏屋和这条道路起点的宝藏屋）。
-请你编写程序为小明选定由赞助商打通的宝藏屋和之后开凿的道路，使得工程总代价最小，并输出这个最小值。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
-<p>一看数据范围只有 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="6.818ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 2935.6 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">n=12</title>
+<p>现在有一棵二叉树，所有非叶子节点都有两个孩子。在每个叶子节点上有一个权值(有 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">n</title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E2-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
-<path stroke-width="1" id="E2-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E2-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
  <use xlink:href="#E2-MJMATHI-6E" x="0" y="0"/>
- <use xlink:href="#E2-MJMAIN-3D" x="878" y="0"/>
-<g transform="translate(1934,0)">
- <use xlink:href="#E2-MJMAIN-31"/>
- <use xlink:href="#E2-MJMAIN-32" x="500" y="0"/>
 </g>
+</svg></span> 个叶子节点，满足这些权值为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.851ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1658 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+<title id="MathJax-SVG-3-Title">1..n</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E3-MJMAIN-2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"/>
+<path stroke-width="1" id="E3-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E3-MJMAIN-31"/>
+ <use xlink:href="#E3-MJMAIN-2E" x="500" y="0"/>
+ <use xlink:href="#E3-MJMAIN-2E" x="779" y="0"/>
+ <use xlink:href="#E3-MJMATHI-6E" x="1057" y="0"/>
 </g>
-</svg></span> 直接考虑状压，然后发现状压不太好写，直接记忆化搜索一下就好了</p>
+</svg></span> 的一个排列)。可以任意交换每个非叶子节点的左右孩子。</p>
+<a id="more"></a>
+<p>要求进行一系列交换，使得最终所有叶子节点的权值按照遍历序写出来，逆序对个数最少</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2>
+<p>可以把这个当做一个线段树合并的板子题</p>
+<p>考虑逆序对的贡献，就像是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.292ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1417.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
+<title id="MathJax-SVG-4-Title">cdq</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E4-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"/>
+<path stroke-width="1" id="E4-MJMATHI-64" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
+<path stroke-width="1" id="E4-MJMATHI-71" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E4-MJMATHI-63" x="0" y="0"/>
+ <use xlink:href="#E4-MJMATHI-64" x="433" y="0"/>
+ <use xlink:href="#E4-MJMATHI-71" x="957" y="0"/>
+</g>
+</svg></span> 分治那样，前面的小于这个数的个数就是贡献，那么直接开一颗值域线段树，每次向上合并即可</p>
 <h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re register</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    re <span class="keyword">int</span> x=<span class="number">0</span>,f(<span class="number">1</span>);re <span class="keyword">char</span> ch=gc;</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>) &#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;ch=gc;&#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>) x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(ch^<span class="number">48</span>),ch=gc;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">15</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[N][N],cnt,n,m,f[<span class="number">5050</span>],ans=<span class="number">1e9</span>+<span class="number">10</span>,dis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)<span class="keyword">if</span>(s&amp;(<span class="number">1</span>&lt;&lt;i<span class="number">-1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="keyword">if</span>(a[i][j]&lt;<span class="number">1e9</span>&amp;&amp;(!(s&amp;(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>)))&amp;&amp;(dis[i]+<span class="number">1</span>)*a[i][j]+f[s]&lt;f[(s|(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>))])</span><br><span class="line">            &#123;</span><br><span class="line">                dis[j]=dis[i]+<span class="number">1</span>;</span><br><span class="line">                f[s|(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>)]=(dis[i]+<span class="number">1</span>)*a[i][j]+f[s];</span><br><span class="line">                dfs(s|(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">127</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=read(),v=read(),w=read();</span><br><span class="line">        a[u][v]=a[v][u]=min(a[u][v],w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(dis,<span class="number">0</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">63</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        f[<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>)]=<span class="number">0</span>;</span><br><span class="line">        dfs(<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>));</span><br><span class="line">        ans=min(ans,f[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re register</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar()</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    re int x(0),f(1);re char ch(gc);</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;<span class="string">'9'</span>||ch&lt;<span class="string">'0'</span>) &#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>)f=<span class="number">-1</span>;ch=gc;&#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>) x=x*<span class="number">10</span>+ch-<span class="string">'0'</span>,ch=gc;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>,M=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt,tot,ls[M&lt;&lt;<span class="number">2</span>],rs[M&lt;&lt;<span class="number">2</span>],s[M&lt;&lt;<span class="number">2</span>],v[N&lt;&lt;<span class="number">2</span>],l[N&lt;&lt;<span class="number">2</span>],r[N&lt;&lt;<span class="number">2</span>],rt[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line">ll ans,s1,s2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;s[id]=s[ls[id]]+s[rs[id]];&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">built</span><span class="params">(<span class="keyword">int</span> &amp;id,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!id) id=++tot;</span><br><span class="line">    <span class="keyword">if</span>(l==r) &#123;s[id]=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(k&lt;=mid)built(ls[id],l,mid,k);</span><br><span class="line">    <span class="keyword">else</span> built(rs[id],mid+<span class="number">1</span>,r,k);</span><br><span class="line">    pushup(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x) <span class="keyword">return</span> y;</span><br><span class="line">    <span class="keyword">if</span>(!y) <span class="keyword">return</span> x;</span><br><span class="line">    s1+=<span class="number">1L</span>L*s[rs[x]]*s[ls[y]];</span><br><span class="line">    s2+=<span class="number">1L</span>L*s[ls[x]]*s[rs[y]];</span><br><span class="line">    ls[x]=merge(ls[x],ls[y]);</span><br><span class="line">    rs[x]=merge(rs[x],rs[y]);</span><br><span class="line">    pushup(x);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//	cout&lt;&lt;x&lt;&lt;" ";</span></span><br><span class="line">    <span class="keyword">if</span>(!x) <span class="keyword">return</span>;</span><br><span class="line">    solve(l[x]),solve(r[x]);</span><br><span class="line">    <span class="keyword">if</span>(!v[x])</span><br><span class="line">    &#123;</span><br><span class="line">        s1=s2=<span class="number">0</span>;</span><br><span class="line">        rt[x]=merge(rt[l[x]],rt[r[x]]);</span><br><span class="line">        ans+=min(s1,s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    v[x]=read();</span><br><span class="line">    <span class="keyword">if</span>(!v[x])</span><br><span class="line">    &#123;</span><br><span class="line">        l[x]=++cnt;</span><br><span class="line">        init(l[x]);</span><br><span class="line">        r[x]=++cnt;</span><br><span class="line">        init(r[x]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();++cnt;</span><br><span class="line">    init(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;++i)</span><br><span class="line">        <span class="keyword">if</span>(v[i])built(rt[i],<span class="number">1</span>,n,v[i]);</span><br><span class="line">    solve(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -321,17 +334,15 @@
         <div class="post-tags">
             <a href="/tags/题解/" rel="tag"># 题解</a>
           
-            <a href="/tags/NOIP/" rel="tag"># NOIP</a>
+            <a href="/tags/POI/" rel="tag"># POI</a>
           
-            <a href="/tags/状压/" rel="tag"># 状压</a>
-          
-            <a href="/tags/记忆化搜索/" rel="tag"># 记忆化搜索</a>
+            <a href="/tags/线段树合并/" rel="tag"># 线段树合并</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/【题解】CF833B-The-Bakery/" rel="next" title="【题解】CF833B-The-Bakery">
-                <i class="fa fa-chevron-left"></i> 【题解】CF833B-The-Bakery
+              <a href="/【题解】UR1缩进优化/" rel="next" title="【题解】UR1缩进优化">
+                <i class="fa fa-chevron-left"></i> 【题解】UR1缩进优化
               </a>
             
           </div>
@@ -339,10 +350,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/【题解】NOIP2017逛公园/" rel="prev" title="【题解】NOIP2017逛公园">
-                【题解】NOIP2017逛公园 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
