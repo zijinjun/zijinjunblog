@@ -2330,7 +2330,6 @@ mjx-container[display='true'] + br {
 .sidebar .sidebar-button {
   border-bottom: 1px dotted #ccc;
   border-top: 1px dotted #ccc;
-  text-decoration: dashed;
 }
 .sidebar .sidebar-button button {
   border: 0;
@@ -2350,6 +2349,7 @@ mjx-container[display='true'] + br {
 }
 .links-of-author-item {
   margin: 5px 0 0;
+  text-decoration: dashed;
   width: 50%;
 }
 .links-of-author-item a {
