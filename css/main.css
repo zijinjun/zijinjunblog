@@ -2364,7 +2364,6 @@ mjx-container[display='true'] + br {
   border-bottom: 0;
   border-radius: 4px;
   display: block;
-  text-decoration: dashed;
 }
 .links-of-author-item a:hover {
   background: var(--body-bg-color);
