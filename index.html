@@ -224,40 +224,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="悬线法"><a href="#悬线法" class="headerlink" title="悬线法"></a>悬线法</h2><p>悬线法，使用极大化思想来解决一类在矩阵中求最大的满足某种条件的矩阵  </p>
-<p>例：</p>
-<ul>
-<li>给出一个矩形网格，其中有一些障碍点，现在要选出一个最大的子矩形，使得其内部不包括任何障碍点，求该矩形大小</li>
-</ul>
-<p>可以从这个要求的 <code>最大子矩形</code> 的一些性质来着手分析  </p>
-<p><code>最大子矩形</code> 的边界一定是都不能扩展的，否则不符合其 <code>最大</code> 的定义  </p>
-<p>所以，<code>最大子矩形</code> 的边界一定满足下列两种情况之一  </p>
-<ul>
-<li>边界上有障碍点</li>
-<li>边界与整个矩形的边界重合</li>
-</ul>
-<p>所以可以枚举最子大矩形的边界，由于最大子矩形的边界一定是覆盖了一个障碍点或者在边界上的，所以可以枚举障碍点来枚举边界</p>
-<p>但是障碍点的数目多了之后这个算法可能会失效，因为要反复计算有较大重复内容的矩形区域</p>
-<p>所以现在悬线法登场  </p>
-<p><code>悬线</code> 大概这样：  </p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/57b3ngmc.png" alt=""></p>
-<p>当然图中的并不是所有的悬线，但是你应该能发现，所有的最大子矩形应该都是悬线向左/右平移出来的，而且也一定是平移到最左/右端之后形成的矩形是最大子矩形  </p>
-<p>因此，我们考虑枚举每一根悬线来计算最大子矩形的大小  </p>
-<p>对于每一根悬线，如果要计算出让它平移能得到的最大矩形面积，我们需要的信息有  </p>
-<ul>
-<li>该悬线向左平移能到达的最左端 $left$</li>
-<li>该悬线向右平移能到达的最右端 $right$</li>
-<li>该悬线的高度 $height$</li>
-</ul>
-<p>根据这些信息，我们可以计算出对于该悬线的最大子矩形面积为 $(right-left)\times height$</p>
-<p>又因为每一根悬线都是由其最下端的障碍点或者矩形下边界确定的，所以悬线的数量最大是 $N\times M$ 级别的，如果我们能够预处理出一些信息然后让枚举悬线的时候取得上述三个信息的时间为 $O(1)$ 的话就能在 $O(NM)$ 的复杂度内解决大部分的最大矩形问题  </p>
-<p>如何预处理？  </p>
-<p>设 <code>left[i][j]</code> 表示从点 $(i,j)$ 出发向左走能到达的最左边界  </p>
-<p>设 <code>right[i][j]</code> 表示从点 $(i,j)$ 出发向右走能到达的最右边界</p>
-<p>设 <code>height[i][j]</code> 表示从点 $(i,j)$ 出发向上走能到达的最上边界  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先处理单行的相关信息</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=N;i++)</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=M;j++)</span><br><span class="line">        left[i][j]=right[i][j]=j,height[i][j]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=N;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">2</span>;j&lt;=M;j++)</span><br><span class="line">	<span class="keyword">if</span>(book[i][j<span class="number">-1</span>]) left[i][j]=left[i][j<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=M<span class="number">-1</span>;j&gt;<span class="number">0</span>;j--)</span><br><span class="line">    <span class="keyword">if</span>(book[i][j+<span class="number">1</span>]) right[i][j]=right[i][j+<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//合并行间信息，统计答案	</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=N;i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=M;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&gt;<span class="number">1</span>&amp;&amp;book[i<span class="number">-1</span>][j])</span><br><span class="line">        &#123;</span><br><span class="line">            left[i][j]=<span class="built_in">max</span>(left[i][j],left[i<span class="number">-1</span>][j]);</span><br><span class="line">            right[i][j]=<span class="built_in">min</span>(right[i][j],right[i<span class="number">-1</span>][j]);</span><br><span class="line">            height[i][j]=height[i<span class="number">-1</span>][j]+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        ans=<span class="built_in">max</span>(ans,(right[i][j]-left[i][j])*height[i][j]);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>同理，不同的题目对于 <code>障碍点</code> 的定义可能不同，要处理的信息可能也会有略略变化，根据题目而变动！</p>
-<p><code>system(&quot;pause&quot;);</code></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/06/%E6%82%AC%E7%BA%BF%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
