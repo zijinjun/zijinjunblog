@@ -2349,7 +2349,6 @@ mjx-container[display='true'] + br {
 }
 .links-of-author-item {
   margin: 5px 0 0;
-  text-decoration: dashed;
   width: 50%;
 }
 .links-of-author-item a {
@@ -2365,6 +2364,7 @@ mjx-container[display='true'] + br {
   border-bottom: 0;
   border-radius: 4px;
   display: block;
+  text-decoration: dashed;
 }
 .links-of-author-item a:hover {
   background: var(--body-bg-color);
